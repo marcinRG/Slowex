@@ -1,0 +1,58 @@
+
+.keyboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.keyboard-keys {
+  min-width: 320px;
+  max-width: 550px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.key {
+
+  margin: 3px;
+  //display: inline-block;
+  border: 1px solid white;
+  display: flex;
+  min-width: 25px;
+  min-height: 25px;
+  box-shadow: 1px 1px 0 0 #2a0b1c;
+  background-color: white;
+  text-transform: capitalize;
+  font-size: 10px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+
+  @media screen {
+    @media (min-width: 460px) and (min-height: 560px) {
+      min-width: 45px;
+      min-height: 45px;
+    }
+  }
+
+
+  &.found {
+    background-color: green;
+    color: white;
+  }
+
+  &.misplaced {
+    background-color: yellow;
+  }
+
+  &.not_found {
+    background-color: gray;
+    color: white;
+  }
+
+}

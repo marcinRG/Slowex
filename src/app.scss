@@ -1,0 +1,19 @@
+*, 
+html {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.app-body {
+    background-color: #ffdff1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //justify-items: center;
+    //justify-content: center;
+
+}
