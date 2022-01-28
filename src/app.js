@@ -7,6 +7,7 @@ import {DailyChallenge} from "./js/dailyChallenge/DailyChallenge";
 import {CustomChallenge} from "./js/customChallenge/CustomChallenge";
 import {NoWordsChallenge} from "./js/noWords/NoWordsChallege";
 import {AppContext, AppContextProvider} from "./js/context/AppContext";
+import {CodeBreaker} from "./js/codeBreaker/CodeBreaker";
 
 
 const app = document.getElementById("App");
@@ -19,6 +20,7 @@ ReactDOM.render(
                     <Route path={LinksNames.DAILY} element={<DailyChallenge/>}/>
                     <Route path={LinksNames.CUSTOM} element={<CustomChallenge/>}/>
                     <Route path={LinksNames.NO_WORDS} element={<NoWordsChallenge/>}/>
+                    <Route path={LinksNames.CODE_BREAKER} element={<CodeBreaker/>}/>
                 </Routes>
             </div>
         </AppContextProvider>

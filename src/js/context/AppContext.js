@@ -7,9 +7,7 @@ export function AppContextProvider(props) {
 
     const [word, setWord] = useState('kalka');
     const keyboards = {
-        pl_keyboard: [
-            'a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó',
-            'p', 'r', 's', 't', 'q','u', 'w', 'x', 'y', 'z'],
+        pl_keyboard: 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż'.split(''),
         symbols: ['⛳', '⛹', '⚽', '✌', '⏰', '🌈', '🍀', '🍖', '🍔', '🍐', '🍑', '🍒', '🍦', '🍰', '🎅', '🏓', '🏹']
     };
     const [guesses, setGuesses] = useState({

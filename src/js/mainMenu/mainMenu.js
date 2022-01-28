@@ -11,7 +11,7 @@ export function MainMenu() {
                 <li className="link-button"><Link to={LinksNames.DAILY}>Dzienne wyzwanie</Link></li>
                 <li className="link-button"><Link to={LinksNames.CUSTOM}>Customowa gra</Link></li>
                 <li className="link-button"><Link to={LinksNames.NO_WORDS}>Nie znam liter!!!</Link></li>
-                <li className="link-button"><Link to={LinksNames.NO_WORDS}>Złam kod</Link></li>
+                <li className="link-button"><Link to={LinksNames.CODE_BREAKER}>Złam kod</Link></li>
             </ul>
         </div>);
 }

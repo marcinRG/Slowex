@@ -44,10 +44,25 @@
   justify-content: center;
   align-items: center;
 
+
   border: 1px solid #a98296;
   //box-shadow: 2px 2px 0 0 black;
   color: #44132d;
   background-color: white;
   text-transform: capitalize;
+
+  &.found {
+    background-color: #5e733f;
+    color: white;
+  }
+
+  &.misplaced {
+    background-color: #f3f386;
+  }
+
+  &.not_found {
+    background-color: gray;
+    color: white;
+  }
 
 }

@@ -1,11 +1,12 @@
 import React, {useState} from "react";
+import {getKeyLetterClass} from "../utilsAndSettings/getKeyLetterClass";
 
 
 export function LetterCell(props) {
-    const {letter} = props;
+    const {letter, status} = props;
     return (
         <React.Fragment>
-                <div className="letter-cell">{getLetter(letter)}</div>
+            <div className={getKeyLetterClass(status, "letter-cell")}>{getLetter(letter)}</div>
         </React.Fragment>
     );
 }

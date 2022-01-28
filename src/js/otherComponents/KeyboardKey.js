@@ -1,5 +1,5 @@
 import React from 'react';
-import {LetterStatus} from "../utilsAndSettings/letterStatus";
+import {getKeyLetterClass} from "../utilsAndSettings/getKeyLetterClass";
 
 export function KeyboardKey(props) {
     const {letter, status, action} = props;
@@ -8,26 +8,7 @@ export function KeyboardKey(props) {
             action(letter);
         }
     }
-     return (<button className={getKeyClass(status)} onClick={doSomething}>
+     return (<button className={getKeyLetterClass(status, 'key')} onClick={doSomething}>
          {letter}
      </button>);
-}
-
-function getKeyClass(keyStatus) {
-    let keyClass = 'key';
-    switch (keyStatus) {
-
-        case LetterStatus.not_found: {
-            return keyClass + ' ' + 'not_found';
-        }
-        case LetterStatus.found_exact: {
-            return keyClass + ' ' +  'found';
-        }
-        case LetterStatus.found_misplaced: {
-            return keyClass + ' ' + 'misplaced';
-        }
-        case LetterStatus.not_used: {
-            return keyClass;
-        }
-    }
 }

@@ -4,5 +4,6 @@ export const LinksNames = {
     CUSTOM: '/custom',
     NO_WORDS: '/no-words',
     SETTINGS: '/settings',
+    CODE_BREAKER: '/code-breaker',
     INFO: '/info'
 };
