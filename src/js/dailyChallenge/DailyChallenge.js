@@ -4,6 +4,7 @@ import "./DailyChallenge.scss";
 import {Keyboard} from "../otherComponents/Keyboard";
 import {AppContext} from "../context/AppContext";
 import {LetterStatus} from "../utilsAndSettings/letterStatus";
+import {createNewKeysObject} from "../utilsAndSettings/createNewKeysObject";
 
 export function DailyChallenge() {
 
@@ -85,15 +86,8 @@ function initializeGameState(wordLength, guessNumber) {
 
 function initializeKeyboardState() {
    let letters = 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż';
+   return createNewKeysObject(letters.split(''));
    let obj = {};
-
-   letters.split('').forEach((key)=> {
-       obj[key] = {
-           letter: key,
-           status: LetterStatus.not_used
-       }
-   });
-   return obj;
 }
 
 function handleKeyPresses(key) {
