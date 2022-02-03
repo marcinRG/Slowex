@@ -33,6 +33,10 @@
   justify-content: center;
   align-items: center;
 
+  &.function {
+    padding: 0 20px;
+  }
+
   @media screen {
     @media (min-width: 460px) and (min-height: 560px) {
       min-width: 45px;
@@ -55,4 +59,20 @@
     color: white;
   }
 
+}
+
+.daily-challenge-box {
+  .key {
+    font-size: 10px;
+  }
+}
+
+.no-words-challenge-box {
+  .key {
+    font-size: 20px;
+
+    &.function {
+      font-size: 10px;
+    }
+  }
 }

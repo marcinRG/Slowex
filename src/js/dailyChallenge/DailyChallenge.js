@@ -3,14 +3,17 @@ import {LetterCell} from "../otherComponents/LetterCell";
 import "./DailyChallenge.scss";
 import {Keyboard} from "../otherComponents/Keyboard";
 import {AppContext} from "../context/AppContext";
-import {LetterStatus} from "../utilsAndSettings/letterStatus";
 import {createNewKeysObject} from "../utilsAndSettings/createNewKeysObject";
+import {initializeGameState} from "../utilsAndSettings/initializeGameState";
+import {createGuessTable} from "../utilsAndSettings/createGuessTable";
 
 export function DailyChallenge() {
 
     const appContext = useContext(AppContext);
-    const wordLength = 5;
-    const guessNumber = 6;
+    const settings = appContext.gameSettings.dailyGame;
+
+    console.log(settings.guessNumber);
+    console.log(settings.wordLength);
 
 
     const [gameState, setGameState] = useState({});
@@ -21,7 +24,7 @@ export function DailyChallenge() {
 
         console.log('init');
         setKeys(initializeKeyboardState());
-        setGameState(initializeGameState(wordLength, guessNumber));
+        setGameState(initializeGameState(settings.wordLength, settings.guessNumber));
         console.log('everything is set up')
 
         // window.addEventListener('keydown', e => {
@@ -43,46 +46,6 @@ export function DailyChallenge() {
         </div>);
 }
 
-
-function createGuessTable(guesses) {
-    return guesses.map((guessRow, i) => {
-        return (<div className="guess-row" key={i}>
-            {createRowCells(guessRow, i)}
-            </div>)
-    });
-}
-
-function createRowCells(guessRow, rowNumber) {
-    return guessRow.map((cell, i) => {
-        return <LetterCell key={"Row" + rowNumber + "Column" + i} letter={cell.letter}
-                           status={cell.status}></LetterCell>
-    });
-}
-
-function initializeGameState(wordLength, guessNumber) {
-    const currentLetter = 0;
-    const currentGuess = 0;
-    const word = '';
-    let guesses = [];
-    let guessesRow = [];
-    for (let i = 0; i < guessNumber; i++) {
-        for (let k = 0; k < wordLength; k++) {
-            guessesRow.push({
-                letter: '',
-                status: LetterStatus.not_used
-            });
-        }
-        guesses.push(guessesRow);
-        guessesRow = [];
-    }
-    return {
-        currentLetter,
-        currentGuess,
-        word,
-        guesses
-    }
-
-}
 
 function initializeKeyboardState() {
    let letters = 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż';

@@ -23,8 +23,11 @@ export function Keyboard(props) {
                 {(Object.values(keyboard)).map((value, index) => (
                     <KeyboardKey key={index} letter={value.letter} status={value.status} action={appContext.addLetter}/>
                 ))}
-                <button className="key" key="enter" onClick={makeGuess}>Enter</button>
-                <button className="key" key="cancel" onClick={removeLetter}>Cancel</button>
+
+            </div>
+            <div className="keyboard-keys">
+                <button className="key function" key="enter" onClick={makeGuess}>Enter</button>
+                <button className="key function" key="cancel" onClick={removeLetter}>Cancel</button>
             </div>
 
         </div>

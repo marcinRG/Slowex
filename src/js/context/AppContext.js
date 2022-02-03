@@ -10,6 +10,22 @@ export function AppContextProvider(props) {
         pl_keyboard: 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż'.split(''),
         symbols: ['⛳', '⛹', '⚽', '✌', '⏰', '🌈', '🍀', '🍖', '🍔', '🍐', '🍑', '🍒', '🍦', '🍰', '🎅', '🏓', '🏹']
     };
+    const gameSettings = {
+        dailyGame: {
+            wordLength: 5,
+            guessNumber: 6
+        },
+        noWordsGame: {
+            dataSetSize: 12,
+            wordLength: 5,
+            guessNumber: 4
+
+        },
+        codeBreaker: {
+            wordLength: 4,
+            guessNumber: 5
+        }
+    };
     const [guesses, setGuesses] = useState({
         currentTry: [],
         previousGuesses: [],
@@ -34,7 +50,7 @@ export function AppContextProvider(props) {
 
 
     return (<AppContext.Provider
-        value={{word, guesses, keyboards, addLetter, removeLetter, makeGuess}}>
+        value={{word, guesses, keyboards, gameSettings, addLetter, removeLetter, makeGuess}}>
         {props.children}
     </AppContext.Provider>);
 }
