@@ -5,23 +5,29 @@ import {KeyboardKey} from "./KeyboardKey";
 import {AppContext} from "../context/AppContext";
 
 export function Keyboard(props) {
-
+    const {guessAction, letterAction, cancelAction} = props;
     const appContext = useContext(AppContext);
     const {keyboard} = props;
 
     const removeLetter = () => {
-        appContext.removeLetter();
+        cancelAction();
+        //appContext.removeLetter();
     }
 
     const makeGuess = () => {
-        appContext.makeGuess();
+        guessAction();
+        //appContext.makeGuess();
+    }
+
+    const selectLetter = (letter) => {
+        letterAction(letter)
     }
 
     return (
         <div className="keyboard-wrapper">
             <div className="keyboard-keys">
                 {(Object.values(keyboard)).map((value, index) => (
-                    <KeyboardKey key={index} letter={value.letter} status={value.status} action={appContext.addLetter}/>
+                    <KeyboardKey key={index} letter={value.letter} status={value.status} action={selectLetter}/>
                 ))}
 
             </div>

@@ -9,7 +9,7 @@ export function MainMenu() {
             <h1 className="app-title">Słowex</h1>
             <ul className="links-menu">
                 <li className="link-button"><Link to={LinksNames.DAILY}>Dzienne wyzwanie</Link></li>
-                <li className="link-button"><Link to={LinksNames.CUSTOM}>Customowa gra</Link></li>
+                <li className="link-button"><Link to={LinksNames.CUSTOM}>Utwórz własną grę</Link></li>
                 <li className="link-button"><Link to={LinksNames.NO_WORDS}>Nie znam liter!!!</Link></li>
                 <li className="link-button"><Link to={LinksNames.CODE_BREAKER}>Złam kod</Link></li>
             </ul>

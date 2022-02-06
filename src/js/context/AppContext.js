@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import localForage from "localforage";
 import {LetterStatus} from "../utilsAndSettings/letterStatus";
+import {storageConfig} from "../utilsAndSettings/localForageSettings";
 
 export const AppContext = React.createContext(null);
 
 export function AppContextProvider(props) {
 
     const [word, setWord] = useState('kalka');
+    const [dailyWord, setDailyWord] = useState('ksero');
     const keyboards = {
         pl_keyboard: 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż'.split(''),
         symbols: ['⛳', '⛹', '⚽', '✌', '⏰', '🌈', '🍀', '🍖', '🍔', '🍐', '🍑', '🍒', '🍦', '🍰', '🎅', '🏓', '🏹']
@@ -35,6 +38,24 @@ export function AppContextProvider(props) {
         currentLetter: 0,
         currentWord: ''
     });
+
+    const  config = () => {
+        return new Promise((resolve, reject) => {
+            try {
+                localForage.config(storageConfig);
+                resolve(true);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    useEffect(()=>{
+        config().then(()=>{
+           console.log('config success');
+        });
+        console.log('app intialization');
+    },[]);
 
     const addLetter = (letter) => {
         console.log(letter);

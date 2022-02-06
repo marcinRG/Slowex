@@ -11,12 +11,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "localforage": "^1.10.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.1.1",
-    "parcel": "^2.1.1"
+    "parcel": "^2.1.1",
+    "parcel-reporter-static-files-copy": "^1.3.4"
+  },
+  "targets": {
+    "main": false
+  },
+  "staticFiles": {
+    "staticPath": "static"
   }
 }

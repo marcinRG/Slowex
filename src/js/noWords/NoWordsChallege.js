@@ -5,6 +5,8 @@ import {Keyboard} from "../otherComponents/Keyboard";
 import {createNewKeysObject} from "../utilsAndSettings/createNewKeysObject";
 import {createGuessTable} from "../utilsAndSettings/createGuessTable";
 import {initializeGameState} from "../utilsAndSettings/initializeGameState";
+import {LetterStatus} from "../utilsAndSettings/letterStatus";
+import {checkGuess} from "../utilsAndSettings/checkGuess";
 
 export function NoWordsChallenge() {
     const appContext = useContext(AppContext);
@@ -13,6 +15,16 @@ export function NoWordsChallenge() {
     const [keys, setKeys] = useState({});
     const [word, setWord] = useState([]);
     const [gameState, setGameState] = useState({});
+
+    const selectLetter = (letter) => {
+        console.log(letter);
+    }
+
+    const pushCancel = () => {
+    };
+
+    const pushEnter = () => {
+    }
 
     useEffect(() => {
         const symbolsInit = prepareDataSet(symbols, settings.dataSetSize);
@@ -31,7 +43,8 @@ export function NoWordsChallenge() {
                 {(gameState && gameState.guesses) && createGuessTable(gameState.guesses)}
             </div>
 
-            {keys && <Keyboard keyboard={keys}></Keyboard>}
+            {keys && <Keyboard keyboard={keys} letterAction={selectLetter} cancelAction={pushCancel}
+                               guessAction={pushEnter}></Keyboard>}
         </div>);
 }
 
