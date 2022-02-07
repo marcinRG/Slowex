@@ -15,9 +15,6 @@ export function DailyChallenge() {
     const [gameState, setGameState] = useState({});
     const [keys, setKeys] = useState({});
 
-    const makeGuess = (word) => {
-    }
-
     const selectLetter = (letter) => {
         let newState = {...gameState};
         let currentRow = [];
@@ -52,7 +49,7 @@ export function DailyChallenge() {
         let newState = {...gameState};
         if (newState.currentGuess < settings.guessNumber) {
             //TODO - check if word is in dictionary
-            newState.guesses[newState.currentGuess] = checkGuess('ksero',newState.guesses[newState.currentGuess]);
+            newState.guesses[newState.currentGuess] = checkGuess('ksero', newState.guesses[newState.currentGuess]);
             newState.currentLetter = 0;
             newState.currentGuess = newState.currentGuess + 1;
 
@@ -62,7 +59,6 @@ export function DailyChallenge() {
         }
         setGameState(newState);
     }
-
 
     useEffect(() => {
         setKeys(initializeKeyboardState());
@@ -81,7 +77,6 @@ export function DailyChallenge() {
             <div className="all-guesses">
                 {(gameState && gameState.guesses) && createGuessTable(gameState.guesses)}
             </div>
-
             {keys && <Keyboard keyboard={keys} letterAction={selectLetter} cancelAction={pushCancel}
                                guessAction={pushEnter}></Keyboard>}
         </div>);
@@ -91,7 +86,6 @@ export function DailyChallenge() {
 function initializeKeyboardState() {
     let letters = 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż';
     return createNewKeysObject(letters.split(''));
-    let obj = {};
 }
 
 function handleKeyPresses(key) {

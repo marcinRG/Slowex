@@ -6,13 +6,16 @@ import {storageConfig} from "../utilsAndSettings/localForageSettings";
 export const AppContext = React.createContext(null);
 
 export function AppContextProvider(props) {
-
+    const [localDB, setLocalDB] = useState({});
     const [word, setWord] = useState('kalka');
     const [dailyWord, setDailyWord] = useState('ksero');
     const keyboards = {
         pl_keyboard: 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż'.split(''),
-        symbols: ['⛳', '⛹', '⚽', '✌', '⏰', '🌈', '🍀', '🍖', '🍔', '🍐', '🍑', '🍒', '🍦', '🍰', '🎅', '🏓', '🏹']
+        symbols: ['⛳', '⛹', '⚽', '✌', '⏰', '🌈', '🍀', '🍖', '🍔', '🍐', '🍑', '🍒', '🍦', '🍰', '🎅', '🏓', '🏹'],
+        numbers: '0123456789'.split('')
     };
+    const [dictionary, setDictionary] = useState({});
+
     const gameSettings = {
         dailyGame: {
             wordLength: 5,
@@ -27,6 +30,14 @@ export function AppContextProvider(props) {
         codeBreaker: {
             wordLength: 4,
             guessNumber: 5
+        },
+        customGame: {
+            maxWord: 12,
+            minWord: 4,
+            defaultWord: 8,
+            minGuesses: 2,
+            maxGuesses: 15,
+            defaultGuesses: 5,
         }
     };
     const [guesses, setGuesses] = useState({
@@ -39,7 +50,16 @@ export function AppContextProvider(props) {
         currentWord: ''
     });
 
-    const  config = () => {
+    const getDictionaryDataFromServer = () => {
+        return fetch('/5_literowe.txt').then((response) => {
+            return response.text();
+        }).then((data) => {
+            const values = data.split(/\r\n|\n/);
+            return values;
+        });
+    }
+
+    const config = () => {
         return new Promise((resolve, reject) => {
             try {
                 localForage.config(storageConfig);
@@ -50,12 +70,38 @@ export function AppContextProvider(props) {
         });
     }
 
-    useEffect(()=>{
-        config().then(()=>{
-           console.log('config success');
+    const initializeDictionary = () => {
+        getDictionaryDataFromServer().then((data) => {
+            return localForage.setItem('5', data);
+        }).then(() => {
+            return localForage.getItem('5');
+        }).then((data) => {
+            const newState = {...localDB, '5': data, localDB: true};
+            setLocalDB(newState);
         });
-        console.log('app intialization');
-    },[]);
+    }
+
+    useEffect(() => {
+        config().then(() => {
+            return localForage.getItem('5');
+        }).then((data) => {
+            let values = data;
+            if (!values) {
+                initializeDictionary();
+            } else {
+                const newState = {...localDB, '5': data, localDB: true};
+                setLocalDB(newState);
+            }
+        });
+    }, []);
+
+    const findWord = (word) => {
+        if (localDB.localDB) {
+            return localDB['5'].indexOf(word);
+            ;
+        }
+        return -1;
+    }
 
     const addLetter = (letter) => {
         console.log(letter);
@@ -71,7 +117,7 @@ export function AppContextProvider(props) {
 
 
     return (<AppContext.Provider
-        value={{word, guesses, keyboards, gameSettings, addLetter, removeLetter, makeGuess}}>
+        value={{localDB, word, guesses, keyboards, gameSettings, addLetter, removeLetter, makeGuess, findWord}}>
         {props.children}
     </AppContext.Provider>);
 }

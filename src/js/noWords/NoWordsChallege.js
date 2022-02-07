@@ -5,8 +5,6 @@ import {Keyboard} from "../otherComponents/Keyboard";
 import {createNewKeysObject} from "../utilsAndSettings/createNewKeysObject";
 import {createGuessTable} from "../utilsAndSettings/createGuessTable";
 import {initializeGameState} from "../utilsAndSettings/initializeGameState";
-import {LetterStatus} from "../utilsAndSettings/letterStatus";
-import {checkGuess} from "../utilsAndSettings/checkGuess";
 
 export function NoWordsChallenge() {
     const appContext = useContext(AppContext);
