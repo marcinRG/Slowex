@@ -24,6 +24,7 @@ export function DailyChallenge() {
                 letter: letter.toUpperCase(),
                 status: LetterStatus.not_used
             }
+            newState.word = newState.word + letter;
             newState.guesses[newState.currentGuess] = currentRow;
             newState.currentLetter = newState.currentLetter + 1;
         }
@@ -39,6 +40,7 @@ export function DailyChallenge() {
                 letter: '',
                 status: LetterStatus.not_used
             }
+            newState.word = newState.word.substring(0, newState.word.length - 1);
             newState.guesses[newState.currentGuess] = currentRow;
             newState.currentLetter = newState.currentLetter - 1;
         }
@@ -48,13 +50,24 @@ export function DailyChallenge() {
     const pushEnter = () => {
         let newState = {...gameState};
         if (newState.currentGuess < settings.guessNumber) {
-            //TODO - check if word is in dictionary
-            newState.guesses[newState.currentGuess] = checkGuess('ksero', newState.guesses[newState.currentGuess]);
-            newState.currentLetter = 0;
-            newState.currentGuess = newState.currentGuess + 1;
-
+            if (newState.currentLetter >= settings.wordLength) {
+                if (appContext.findWord(newState.word) >= 0) {
+                    newState.guesses[newState.currentGuess] = checkGuess('ksero', newState.guesses[newState.currentGuess]);
+                    newState.currentLetter = 0;
+                    newState.word = '';
+                    newState.currentGuess = newState.currentGuess + 1;
+                } else {
+                    console.log(newState.word);
+                    //todo - dodać komunikat
+                    console.log('brak takiego słowa w słowniku');
+                }
+            } else {
+                //todo - dodać komunikat
+                console.log('za krótkie');
+            }
         }
         if (newState.currentGuess === settings.guessNumber) {
+            //todo - dodać komunikat
             console.log('koniec');
         }
         setGameState(newState);
@@ -63,6 +76,7 @@ export function DailyChallenge() {
     useEffect(() => {
         setKeys(initializeKeyboardState());
         setGameState(initializeGameState(settings.wordLength, settings.guessNumber));
+        //todo - dodać nasłuchiwanie eventów z klawiatury, usuwanie podczas demontowania
         // window.addEventListener('keydown', e => {
         //     e.stopPropagation();
         //     handleKeyPresses(e.key);

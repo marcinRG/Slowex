@@ -7,14 +7,17 @@ export const AppContext = React.createContext(null);
 
 export function AppContextProvider(props) {
     const [localDB, setLocalDB] = useState({});
-    const [word, setWord] = useState('kalka');
-    const [dailyWord, setDailyWord] = useState('ksero');
+
     const keyboards = {
         pl_keyboard: 'aąbcćdeęfghijlłkmnńoóprqstuwyxzźż'.split(''),
         symbols: ['⛳', '⛹', '⚽', '✌', '⏰', '🌈', '🍀', '🍖', '🍔', '🍐', '🍑', '🍒', '🍦', '🍰', '🎅', '🏓', '🏹'],
         numbers: '0123456789'.split('')
     };
-    const [dictionary, setDictionary] = useState({});
+
+    const [daily, setDaily] = useState({});
+    const [custom,setCustom] = useState({});
+    const [noWord, setNoWord] = useState({});
+    const [codeBrake, setCodeBrake] = useState({});
 
     const gameSettings = {
         dailyGame: {
@@ -40,15 +43,7 @@ export function AppContextProvider(props) {
             defaultGuesses: 5,
         }
     };
-    const [guesses, setGuesses] = useState({
-        currentTry: [],
-        previousGuesses: [],
-        wordLength: 5,
-        guesses: 6,
-        currentGuess: 0,
-        currentLetter: 0,
-        currentWord: ''
-    });
+
 
     const getDictionaryDataFromServer = () => {
         return fetch('/5_literowe.txt').then((response) => {
@@ -98,7 +93,6 @@ export function AppContextProvider(props) {
     const findWord = (word) => {
         if (localDB.localDB) {
             return localDB['5'].indexOf(word);
-            ;
         }
         return -1;
     }
@@ -117,7 +111,7 @@ export function AppContextProvider(props) {
 
 
     return (<AppContext.Provider
-        value={{localDB, word, guesses, keyboards, gameSettings, addLetter, removeLetter, makeGuess, findWord}}>
+        value={{localDB, keyboards, gameSettings, addLetter, removeLetter, makeGuess, findWord}}>
         {props.children}
     </AppContext.Provider>);
 }
