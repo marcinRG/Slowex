@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import localForage from "localforage";
-import {LetterStatus} from "../utilsAndSettings/letterStatus";
 import {storageConfig} from "../utilsAndSettings/localForageSettings";
+import {initializeGameState} from "../utilsAndSettings/initializeGameState";
 
 export const AppContext = React.createContext(null);
 
@@ -13,11 +13,6 @@ export function AppContextProvider(props) {
         symbols: ['⛳', '⛹', '⚽', '✌', '⏰', '🌈', '🍀', '🍖', '🍔', '🍐', '🍑', '🍒', '🍦', '🍰', '🎅', '🏓', '🏹'],
         numbers: '0123456789'.split('')
     };
-
-    const [daily, setDaily] = useState({});
-    const [custom,setCustom] = useState({});
-    const [noWord, setNoWord] = useState({});
-    const [codeBrake, setCodeBrake] = useState({});
 
     const gameSettings = {
         dailyGame: {
@@ -43,6 +38,11 @@ export function AppContextProvider(props) {
             defaultGuesses: 5,
         }
     };
+
+    const [daily, setDaily] = useState(initializeGameState(gameSettings.dailyGame.wordLength, gameSettings.dailyGame.guessNumber));
+    const [noWord, setNoWord] = useState(initializeGameState(gameSettings.noWordsGame.wordLength, gameSettings.noWordsGame.guessNumber));
+    const [custom, setCustom] = useState({});
+    const [codeBrake, setCodeBrake] = useState({});
 
 
     const getDictionaryDataFromServer = () => {
@@ -111,7 +111,7 @@ export function AppContextProvider(props) {
 
 
     return (<AppContext.Provider
-        value={{localDB, keyboards, gameSettings, addLetter, removeLetter, makeGuess, findWord}}>
+        value={{daily, noWord, localDB, keyboards, gameSettings, addLetter, removeLetter, makeGuess, findWord}}>
         {props.children}
     </AppContext.Provider>);
 }
